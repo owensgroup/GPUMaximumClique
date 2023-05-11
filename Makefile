@@ -1,10 +1,7 @@
 NVCC = nvcc
 NVCCFLAGS = --std=c++14 --expt-extended-lambda -O3 -rdc=true --generate-line-info
 INC = -I/usr/include -I./gunrock -I./gunrock/externals/moderngpu/src -I./gunrock/externals/rapidjson/include
-#INC = -I../../gunrock -I../../gunrock/externals/rapidjson/include -I/usr/include -I../../gunrock/externals/moderngpu/include -I../../gunrock/externals/moderngpu/src
-#INC = -I../../gunrock -I../../gunrock/externals/rapidjson/include -I/usr/include -I../../gunrock/externals/cub -I../../gunrock/externals/moderngpu/include -I../../gunrock/externals/moderngpu/src
 LINK = -Xcompiler -fopenmp -Xlinker -lgomp
-#LINK = -Xcompiler -DBOOST_FOUND -Xlinker -lboost_system -Xlinker -lboost_chrono -Xlinker -lboost_timer -Xlinker -lboost_filesystem -Xcompiler -fopenmp -Xlinker -lgomp
 
 GIT_SHA = -DGIT_SHA1="\"$(shell git rev-parse HEAD)\""
 GUNROCK_GIT_SHA = -DGUNROCK_GIT_SHA1="\"$(shell cd gunrock; git rev-parse HEAD)\""
