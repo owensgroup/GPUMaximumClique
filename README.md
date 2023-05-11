@@ -19,6 +19,6 @@ To test for the brock200\_2.mtx dataset:
 `./correctnessTest.o`
 
 To run on your graph (in matrix market format):
-`./test.o market [your\_file]>`
+`./test.o market [your_file]`
 
 commandLine.md describes all of the command line parameter options that can be used to select different configuration options for the maximum clique solver.
