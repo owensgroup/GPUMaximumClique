@@ -12,8 +12,9 @@ cd moderngpu
 git checkout 2b3985541c8e88a133769598c406c33ddde9d0a5
 cd ..
 git clone https://github.com/Tencent/rapidjson.git
-make all
 ```
+
+Now you should be able to build using `make all`
 
 To test for the brock200\_2.mtx dataset:
 `./correctnessTest.o`
