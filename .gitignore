@@ -1,3 +1,8 @@
+*.o
+*.mtx.coo_edge_pairs
+*.mtx.meta
+eval/*
+*.swp
 *.i
 *.ii
 *.gpu

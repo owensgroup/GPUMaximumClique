@@ -1,0 +1,53 @@
+# Required
+- graph-type=market
+    - This says the input will be a matrix-market (COO) format graph
+- graph-file="filename.mtx"
+    - What is the graph you want to load? (default is STDIN)
+
+# Optional
+- quiet (T/F) (default = false)
+- device (int) (default = 0)
+    - Set the CUDA device number
+- bfs (T/F) (default = true)
+    - Run max clique algorithm on complete set of sublists all at once
+    - Can choose either BFS, windowing, or run both to compare
+- windowing (T/F) (default = false)
+    - Run max clique algorithm on one window of sublists at a time - basically a broad depth-first search
+    - Can choose either BFS, windowing, or run both to compare.
+- heuristic (string) options: none, greedy, multi\_greedy (default = "multi\_greedy")
+    - Specify which heuristic to use to establist an initial lower bound for pruning the search
+- frac\_seeds (float) (default=1.0)
+    - Specify the fraction (from 0.0 to 1.0) of vertices in the graph to use as seeds in the multi-run greedy heuristic - the number of seeds is the number of runs of the heuristic
+- pruning (string) options: none, simple (default = "simple")
+    - Specify methods of pruning out non-viable candidate cliques
+- kcore (T/F) (default=false)
+    - Whether to compute core numbers for vertices to use in pruning
+- timing (std::string) options: none, all, total, preproc, loop, windowed, bfs (default = "all")
+    - Which parts of the algorithm to output the timing for
+- num\_cliques (T/F) (default = false)
+    - Print the number of candidate cliques at each iteration, revealing the distribution of clique sizes
+- window\_size (unsigned int) (default = 8192)
+    - Size of the subset of clique lists that will be solved depth-first for the implementation using windowing
+- sort\_sublists (T/F) (default = true)
+    - Sort the vertices (by degree or core number) before finding 2-cliques, such that the highly-connected vertices' candidate cliques will be searched first in windowed version
+- expected\_max (unsigned int) (default = 0)
+    - Expected maximum clique size. Used for validation.
+- overall\_perf (T/F) (default = true)
+    - If true, don't collect metrics that will interfere with runtime results. 
+- lowerbound (unsigned int) (default = 0)
+    - Known lower bound on the size of the maximum clique
+    - Can also be used for testing performance/pruning with improved heuristic
+- orientation (string) options: index, degree (default = "degree")
+    - Specify which edge to keep out of each undirected pair
+    - "index" keeps the edge (u,v) where u < v
+    - "degree" keeps edge (u,v) in which deg(u) < deg(v)
+- order\_candidates (T/F) (default = true)
+    - If true, sort the candidates within sublists (destination vertices) from low to high degree.
+    - Never sort candidates if orientation is by index (to simplify implementation).
+
+# Pre-set gunrock parameters
+- undirected=true
+    - Require the graph to be undirected to make sure we don't miss any cliques
+    - Creates an edge (dest, src) for each (src, dest) in the input graph if it doesn't already exist
+- sort-csr=true
+    - Sorts the edges within each src vertex's list (e.g., if you have (1,3) and (1,6), without sorting, it may be that the 6 will be stored first in vertex 1's segment without this flag)
